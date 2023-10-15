@@ -4,11 +4,13 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="dist/output.css">
+   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/dist/output.css">
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+   <script src="https://cdn.tailwindcss.com"></script>
    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-   <title>Absensi</title>
+   <title>Asensi</title>
 </head>
 
 <body>
@@ -149,6 +151,12 @@
    </div>
 </body>
 <!-- start js modals logout -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+AOS.init({
+   once: true,
+});
+</script>
 <script>
 function showDialog() {
    const dialog = document.getElementById('dialog');
