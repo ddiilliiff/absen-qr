@@ -6,6 +6,6 @@ class Admin extends BaseController
 {
     public function index()
     {
-        echo 'INI ADMIN';
+        return view('admin/index');
     }
 }
