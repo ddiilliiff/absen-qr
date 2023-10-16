@@ -6,6 +6,12 @@ class Admin extends BaseController
 {
     public function index()
     {
-        echo 'INI ADMIN';
+        $data = [
+            'judul' => 'Dashboard',
+            'menu' => 'dashboard',
+            'submenu' => '',
+            'page' => 'admin/v_dashboard',
+        ];
+        return view('v_template', $data);
     }
 }
