@@ -7,35 +7,35 @@ use CodeIgniter\Model;
 class MahasiswaModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'mahasiswas';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $table            = 'tbl_dt_mhs';
+    protected $primaryKey       = 'npm';
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['npm', 'nama_mhs', 'tempat_lahir', 'tgl_lahir', 'jk', 'email'];
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    public function allData()
+    {
+        return $this->db->table('tbl_dt_mhs')
+            ->orderBy('npm', 'ASC')
+            ->get()->getResultArray();
+    }
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+    public function add($data)
+    {
+        $this->db->table('tbl_dt_mhs')->insert($data);
+    }
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    public function edit($data)
+    {
+        $this->db->table('tbl_dt_mhs')
+            ->where('npm', $data['npm'])
+            ->update($data);
+    }
+
+    public function delete_data($data)
+    {
+        $this->db->table('tbl_dt_mhs')
+            ->where('npm', $data['npm'])
+            ->delete($data);
+    }
 }

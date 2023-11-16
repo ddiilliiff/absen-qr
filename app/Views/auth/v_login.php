@@ -37,9 +37,9 @@
         }
         ?>
         <?php echo form_open('Login/CekLogin') ?>
-        <p class="text-danger"><?= ($validation->hasError('email')) ? $validation->getError('email') : ''; ?></p>
+        <p class="text-danger"><?= ($validation->hasError('username')) ? $validation->getError('username') : ''; ?></p>
         <div class="input-box">
-            <input type="text" placeholder="Username" required name="email">
+            <input type="text" placeholder="Username" required name="username">
             <i class='bx bxs-user'></i>
         </div>
 

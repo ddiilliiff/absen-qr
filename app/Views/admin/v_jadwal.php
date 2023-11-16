@@ -46,7 +46,55 @@
             Tambah
             <i class="ri-add-line"></i>
          </button>
+         <div
+            class="modal h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
+            <!-- modal -->
+            <div class="bg-white rounded shadow-lg w-1/3">
+               <!-- modal header -->
+               <div class="border-b px-4 py-2">
+                  <h3 class="text-4xl">Data Jadwal</h3>
+               </div>
+               <!-- modal body -->
+               <div class="p-3">
+                  <?php echo form_open('Jadwal/InsertData'); ?>
+                  <div class="flex gap-2">
+                     <div class="grid grid-rows-2 items-center pb-2 w-full">
+                        <label for="kode_mk">Mata Kuliah</label>
+                        <select name="kode_mk" id="kode_mk" class="border rounded-lg px-2 py-1">
+                           <option value="0">---PILIH MK---</option>
+                           <?php foreach ($mk as $key => $val) { ?>
+                           <option value="<?php echo $val['kode_mk']; ?>"><?php echo $val['mata_kuliah']; ?></option>
+                           <?php }?>
+                        </select>
+                     </div>
+                     <div class="grid grid-rows-2 items-center pb-2  w-full">
+                        <label for="jam">Jam</label>
+                        <input type="text" name="jam" id="jam" class="border rounded-lg px-2 py-1" required />
+                     </div>
+                  </div>
+                  <div class="flex gap-2">
+                     <div class="grid grid-rows-2 items-center pb-2  w-full ">
+                        <label for="ruangan">Ruangan</label>
+                        <input type="text" name="ruangan" id="ruangan" class="border rounded-lg px-2 py-1" required />
+                     </div>
+                     <div class="grid grid-rows-2 items-center pb-2  w-full ">
+                        <label for="kelas">Kelas</label>
+                        <input type="text" name="kelas" id="kelas" class="border rounded-lg px-2 py-1" required />
+                     </div>
+                  </div>
 
+                  <div class="flex justify-end items-center w-100 p-3">
+                     <button class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
+                        Cancel
+                     </button>
+                     <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">
+                        Simpan
+                     </button>
+                  </div>
+                  <?php echo form_close(); ?>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!-- datatables start -->
@@ -55,34 +103,32 @@
             <thead>
                <tr>
                   <th>No</th>
-                  <th>NIDN</th>
-                  <th>Nama Dosen</th>
-                  <th>Tempat Lahir</th>
-                  <th>Tanggal lahir</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Email</th>
+                  <th>Mata Kuliah</th>
+                  <th>Dosen</th>
+                  <th>Jam</th>
+                  <th>Ruangan</th>
+                  <th>Kelas</th>
                   <th>Aksi</th>
                </tr>
             </thead>
             <tbody>
                <?php $no = 1;
-      foreach ($dosen as $key => $value) { ?>
+      foreach ($jadwal as $key => $value) { ?>
                <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $value['nidn']; ?></td>
+                  <td><?php echo $value['mata_kuliah']; ?></td>
                   <td><?php echo $value['nama_dosen']; ?></td>
-                  <td><?php echo $value['tempat_lahir']; ?></td>
-                  <td><?php echo $value['tgl_lahir']; ?></td>
-                  <td><?php echo $value['jk']; ?></td>
-                  <td><?php echo $value['email']; ?></td>
+                  <td><?php echo $value['jam']; ?></td>
+                  <td><?php echo $value['ruangan']; ?></td>
+                  <td><?php echo $value['kelas']; ?></td>
                   <td>
                      <div class="flex justify-center gap-4 px-4">
                         <button
-                           class="show-modal-edit-<?php echo $value['nidn']; ?> border border-sky-400 rounded-lg px-2 py-1 hover:bg-sky-400 hover:text-white"
-                           data-nidn="<?php echo $value['nidn']; ?>">
+                           class="show-modal-edit-<?php echo $value['id_jadwal']; ?> border border-sky-400 rounded-lg px-2 py-1 hover:bg-sky-400 hover:text-white"
+                           data-id-jadwal="<?php echo $value['id_jadwal']; ?>">
                            edit
                         </button>
-                        <a href="<?php echo base_url('Admin/deleteDosen/'.$value['nidn']); ?>"
+                        <a href="<?php echo base_url('Mahasiswa/DeleteData/'.$value['id_jadwal']); ?>"
                            onclick="return confirm('Apakah Data Ini Akan Dihapus ?')"
                            class="border border-red-500 rounded-lg px-2 py-1 hover:bg-red-500 hover:text-white">hapus</a>
                      </div>
@@ -90,110 +136,59 @@
                </tr>
                <?php } ?>
             </tbody>
-
+            </tfoot>
          </table>
       </div>
       <!-- datatables end -->
    </div>
-   <div class="modal h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
-      <!-- modal -->
-      <div class="bg-white rounded shadow-lg w-1/3">
-         <!-- modal header -->
-         <div class="border-b px-4 py-2">
-            <h3 class="text-4xl">Data Dosen</h3>
-         </div>
-         <!-- modal body -->
-         <div class="p-3">
-            <?php echo form_open('Admin/insertDosen'); ?>
-            <div class="flex gap-2">
-               <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nidn">NIDN</label>
-                  <input type="text" name="nidn" class="border rounded-lg px-2 py-1" required />
-               </div>
-               <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nama">Nama Dosen</label>
-                  <input type="text" name="nama_dosen" id="nama" class="border rounded-lg px-2 py-1" required />
-               </div>
-            </div>
-            <div class="flex gap-2">
-               <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tmptLahir">Tempat Lahir</label>
-                  <input type="text" name="tempat_lahir" id="tmptLahir" class="border rounded-lg px-2 py-1" required />
-               </div>
-               <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tgl_lahir">Tanggal Lahir</label>
-                  <input type="date" name="tgl_lahir" id="tglLahir" class="border rounded-lg px-2 py-1" required />
-               </div>
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="jk">Jenis Kelamin</label>
-               <input type="text" name="jk" id="jk" class="border rounded-lg px-2 py-1" required />
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="email">Email</label>
-               <input type="email" name="email" id="email" class="border rounded-lg px-2 py-1" required />
-            </div>
-            <div class="flex justify-end items-center w-100 p-3">
-               <button class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
-                  Cancel
-               </button>
-               <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">
-                  Simpan
-               </button>
-            </div>
-            <?php echo form_close(); ?>
-         </div>
-      </div>
-   </div>
-   <?php foreach ($dosen as $key => $value) { ?>
+
+   <?php foreach ($jadwal as $key => $value) { ?>
    <div
-      class="modal-edit-<?php echo $value['nidn']; ?> h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
+      class="modal-edit-<?php echo $value['id_jadwal']; ?> h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
       <!-- modal edit-->
       <div class="bg-white rounded shadow-lg w-1/3">
          <!-- modal header -->
          <div class="border-b px-4 py-2">
-            <h3 class="text-4xl">Data Dosen</h3>
+            <h3 class="text-4xl">Data Jadwal</h3>
          </div>
          <!-- modal body -->
          <div class="p-3">
-            <?php echo form_open('Admin/updtaeDosen'); ?>
+            <?php echo form_open('Admin/updateJadwal'); ?>
             <div class="flex gap-2">
+               <input type="hidden" value="<?php echo $value['id_jadwal']; ?>">
+               <div class="grid grid-rows-2 items-center pb-2 w-full">
+                  <label for="kode_mk">Kode Mata Kuliah</label>
+                  <input type="text" name="kode_mk" id="kode_mk" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['kode_mk']; ?>" />
+               </div>
                <div class="grid grid-rows-2 items-center pb-2 w-full">
                   <label for="nidn">NIDN</label>
                   <input type="text" name="nidn" id="nidn" class="border rounded-lg px-2 py-1" required
                      value="<?php echo $value['nidn']; ?>" />
                </div>
-               <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nama">Nama Dosen</label>
-                  <input type="text" name="nama_dosen" id="nama_dosen" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['nama_dosen']; ?>" />
+            </div>
+            <div class="flex gap-2">
+               <div class="grid grid-rows-2 items-center pb-2">
+                  <label for="jam">Jam</label>
+                  <input type="text" name="jam" id="jam" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['jam']; ?>" />
+               </div>
+               <div class="grid grid-rows-2 items-center pb-2">
+                  <label for="ruangan">Ruangan</label>
+                  <input type="text" name="ruangan" id="ruangan" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['ruangan']; ?>" />
                </div>
             </div>
             <div class="flex gap-2">
                <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tmptLahir">Tempat Lahir</label>
-                  <input type="text" name="tempat_lahir" id="tmptLahir" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['tempat_lahir']; ?>" />
+                  <label for="kelas">Kelas</label>
+                  <input type="text" name="kelas" id="kelas" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['kelas']; ?>" />
                </div>
-               <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tgl_lahir">Tanggal Lahir</label>
-                  <input type="date" name="tgl_lahir" id="tglLahir" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['tgl_lahir']; ?>" />
-               </div>
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="jk">Jenis Kelamin</label>
-               <input type="text" name="jk" id="jk" class="border rounded-lg px-2 py-1" required
-                  value="<?php echo $value['jk']; ?>" />
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="email">Email</label>
-               <input type="email" name="email" id="email" class="border rounded-lg px-2 py-1" required
-                  value="<?php echo $value['email']; ?>" />
             </div>
             <div class="flex justify-end items-center w-100 p-3">
                <button type="button"
-                  class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal-edit-<?php echo $value['nidn']; ?>">
+                  class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal-edit-<?php echo $value['id_jadwal']; ?>">
                   Cancel
                </button>
                <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">

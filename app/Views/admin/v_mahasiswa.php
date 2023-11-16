@@ -46,7 +46,60 @@
             Tambah
             <i class="ri-add-line"></i>
          </button>
-
+         <div
+            class="modal h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
+            <!-- modal -->
+            <div class="bg-white rounded shadow-lg w-1/3">
+               <!-- modal header -->
+               <div class="border-b px-4 py-2">
+                  <h3 class="text-4xl">Data Mahasiswa</h3>
+               </div>
+               <!-- modal body -->
+               <div class="p-3">
+                  <?php echo form_open('Admin/insertMahasiswa'); ?>
+                  <div class="flex gap-2">
+                     <div class="grid grid-rows-2 items-center pb-2 w-full">
+                        <label for="npm">NPM</label>
+                        <input type="text" name="npm" class="border rounded-lg px-2 py-1" required />
+                     </div>
+                     <div class="grid grid-rows-2 items-center pb-2 w-full">
+                        <label for="nama">Nama Mahasiswa</label>
+                        <input type="text" name="nama_mhs" id="nama" class="border rounded-lg px-2 py-1" required />
+                     </div>
+                  </div>
+                  <div class="flex gap-2">
+                     <div class="grid grid-rows-2 items-center pb-2">
+                        <label for="tmptLahir">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" id="tmptLahir" class="border rounded-lg px-2 py-1"
+                           required />
+                     </div>
+                     <div class="grid grid-rows-2 items-center pb-2">
+                        <label for="tgl_lahir">Tanggal Lahir</label>
+                        <input type="date" name="tgl_lahir" id="tglLahir" class="border rounded-lg px-2 py-1"
+                           required />
+                     </div>
+                  </div>
+                  <div class="grid grid-rows-2 items-center pb-2">
+                     <label for="jk">Jenis Kelamin</label>
+                     <input type="text" name="jk" id="jk" class="border rounded-lg px-2 py-1" required />
+                  </div>
+                  <div class="grid grid-rows-2 items-center pb-2">
+                     <label for="email">Email</label>
+                     <input type="email" name="email" id="email" class="border rounded-lg px-2 py-1" required />
+                  </div>
+                  <div class="flex justify-end items-center w-100 p-3">
+                     <button type="button" onclick="hideDialog();"
+                        class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
+                        Cancel
+                     </button>
+                     <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">
+                        Simpan
+                     </button>
+                  </div>
+                  <?php echo form_close(); ?>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!-- datatables start -->
@@ -55,8 +108,8 @@
             <thead>
                <tr>
                   <th>No</th>
-                  <th>NIDN</th>
-                  <th>Nama Dosen</th>
+                  <th>NPM</th>
+                  <th>Nama Mahasiswa</th>
                   <th>Tempat Lahir</th>
                   <th>Tanggal lahir</th>
                   <th>Jenis Kelamin</th>
@@ -66,11 +119,11 @@
             </thead>
             <tbody>
                <?php $no = 1;
-      foreach ($dosen as $key => $value) { ?>
+      foreach ($mhs as $key => $value) { ?>
                <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $value['nidn']; ?></td>
-                  <td><?php echo $value['nama_dosen']; ?></td>
+                  <td><?php echo $value['npm']; ?></td>
+                  <td><?php echo $value['nama_mhs']; ?></td>
                   <td><?php echo $value['tempat_lahir']; ?></td>
                   <td><?php echo $value['tgl_lahir']; ?></td>
                   <td><?php echo $value['jk']; ?></td>
@@ -78,11 +131,11 @@
                   <td>
                      <div class="flex justify-center gap-4 px-4">
                         <button
-                           class="show-modal-edit-<?php echo $value['nidn']; ?> border border-sky-400 rounded-lg px-2 py-1 hover:bg-sky-400 hover:text-white"
-                           data-nidn="<?php echo $value['nidn']; ?>">
+                           class="show-modal-edit-<?php echo $value['npm']; ?> border border-sky-400 rounded-lg px-2 py-1 hover:bg-sky-400 hover:text-white"
+                           data-npm="<?php echo $value['npm']; ?>">
                            edit
                         </button>
-                        <a href="<?php echo base_url('Admin/deleteDosen/'.$value['nidn']); ?>"
+                        <a href="<?php echo base_url('Mahasiswa/DeleteData/'.$value['npm']); ?>"
                            onclick="return confirm('Apakah Data Ini Akan Dihapus ?')"
                            class="border border-red-500 rounded-lg px-2 py-1 hover:bg-red-500 hover:text-white">hapus</a>
                      </div>
@@ -90,83 +143,33 @@
                </tr>
                <?php } ?>
             </tbody>
-
          </table>
       </div>
       <!-- datatables end -->
    </div>
-   <div class="modal h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
-      <!-- modal -->
-      <div class="bg-white rounded shadow-lg w-1/3">
-         <!-- modal header -->
-         <div class="border-b px-4 py-2">
-            <h3 class="text-4xl">Data Dosen</h3>
-         </div>
-         <!-- modal body -->
-         <div class="p-3">
-            <?php echo form_open('Admin/insertDosen'); ?>
-            <div class="flex gap-2">
-               <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nidn">NIDN</label>
-                  <input type="text" name="nidn" class="border rounded-lg px-2 py-1" required />
-               </div>
-               <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nama">Nama Dosen</label>
-                  <input type="text" name="nama_dosen" id="nama" class="border rounded-lg px-2 py-1" required />
-               </div>
-            </div>
-            <div class="flex gap-2">
-               <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tmptLahir">Tempat Lahir</label>
-                  <input type="text" name="tempat_lahir" id="tmptLahir" class="border rounded-lg px-2 py-1" required />
-               </div>
-               <div class="grid grid-rows-2 items-center pb-2">
-                  <label for="tgl_lahir">Tanggal Lahir</label>
-                  <input type="date" name="tgl_lahir" id="tglLahir" class="border rounded-lg px-2 py-1" required />
-               </div>
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="jk">Jenis Kelamin</label>
-               <input type="text" name="jk" id="jk" class="border rounded-lg px-2 py-1" required />
-            </div>
-            <div class="grid grid-rows-2 items-center pb-2">
-               <label for="email">Email</label>
-               <input type="email" name="email" id="email" class="border rounded-lg px-2 py-1" required />
-            </div>
-            <div class="flex justify-end items-center w-100 p-3">
-               <button class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
-                  Cancel
-               </button>
-               <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">
-                  Simpan
-               </button>
-            </div>
-            <?php echo form_close(); ?>
-         </div>
-      </div>
-   </div>
-   <?php foreach ($dosen as $key => $value) { ?>
+
+   <?php foreach ($mhs as $key => $value) { ?>
    <div
-      class="modal-edit-<?php echo $value['nidn']; ?> h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
+      class="modal-edit-<?php echo $value['npm']; ?> h-screen w-full fixed left-0 top-0 justify-center items-center bg-black bg-opacity-50 z-40 hidden">
       <!-- modal edit-->
       <div class="bg-white rounded shadow-lg w-1/3">
          <!-- modal header -->
          <div class="border-b px-4 py-2">
-            <h3 class="text-4xl">Data Dosen</h3>
+            <h3 class="text-4xl">Data Mahasiswa</h3>
          </div>
          <!-- modal body -->
          <div class="p-3">
-            <?php echo form_open('Admin/updtaeDosen'); ?>
+            <?php echo form_open('Admin/updateMahasiswa'); ?>
             <div class="flex gap-2">
                <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nidn">NIDN</label>
-                  <input type="text" name="nidn" id="nidn" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['nidn']; ?>" />
+                  <label for="npm">NPM</label>
+                  <input type="text" name="npm" id="npm" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['npm']; ?>" />
                </div>
                <div class="grid grid-rows-2 items-center pb-2 w-full">
-                  <label for="nama">Nama Dosen</label>
-                  <input type="text" name="nama_dosen" id="nama_dosen" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['nama_dosen']; ?>" />
+                  <label for="nama">Nama Mahasiswa</label>
+                  <input type="text" name="nama_mhs" id="nama_mhs" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['nama_mhs']; ?>" />
                </div>
             </div>
             <div class="flex gap-2">
@@ -193,7 +196,7 @@
             </div>
             <div class="flex justify-end items-center w-100 p-3">
                <button type="button"
-                  class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal-edit-<?php echo $value['nidn']; ?>">
+                  class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal-edit-<?php echo $value['npm']; ?>">
                   Cancel
                </button>
                <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">

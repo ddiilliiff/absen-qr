@@ -18,14 +18,11 @@ class FilterAdmin implements FilterInterface
      * sent back to the client, allowing for error pages,
      * redirects, etc.
      *
-     * @param RequestInterface $request
-     * @param array|null       $arguments
-     *
-     * @return mixed
+     * @param array|null $arguments
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('level') == "") {
+        if (session()->get('role') == '') {
             return redirect()->to(base_url('Login'));
         }
     }
@@ -36,16 +33,12 @@ class FilterAdmin implements FilterInterface
      * to stop execution of other after filters, short of
      * throwing an Exception or Error.
      *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     * @param array|null        $arguments
-     *
-     * @return mixed
+     * @param array|null $arguments
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if (session()->get('level') == "0") {
-            return redirect()->to(base_url('Admin'));
-        }
+        // if (session()->get('role') == '1') {
+        //     return redirect()->to('Admin');
+        // }
     }
 }

@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AbsenModel extends Model
+class QRCModel extends Model
 {
     protected $DBGroup = 'default';
-    protected $table = 'tbl_dt_absen';
-    protected $primaryKey = 'id_absen';
+    protected $table = 'tbl_dt_qrc';
+    protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = [];
+    protected $allowedFields = ['id', 'id_jadwal', 'qr'];
 
     // Dates
     protected $useTimestamps = false;

@@ -6,12 +6,12 @@ use CodeIgniter\Model;
 
 class DosenModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'tbl_dt_dosen';
-    protected $primaryKey       = 'nidn';
-    protected $returnType       = 'array';
-    protected $protectFields    = true;
-    protected $allowedFields    = ['nidn', 'nama_dosen', 'tempat_lahir', 'tgl_lahir', 'jk', 'email'];
+    protected $DBGroup = 'default';
+    protected $table = 'tbl_dt_dosen';
+    protected $primaryKey = 'nidn';
+    protected $returnType = 'array';
+    protected $protectFields = true;
+    protected $allowedFields = ['nidn', 'nama_dosen', 'tempat_lahir', 'tgl_lahir', 'jk', 'email'];
 
     public function allData()
     {
@@ -20,22 +20,8 @@ class DosenModel extends Model
             ->get()->getResultArray();
     }
 
-    public function add($data)
+    public function matkulByDosen()
     {
-        $this->db->table('tbl_dt_dosen')->insert($data);
-    }
-
-    public function edit($data)
-    {
-        $this->db->table('tbl_dt_dosen')
-            ->where('nidn', $data['nidn'])
-            ->update($data);
-    }
-
-    public function delete_data($data)
-    {
-        $this->db->table('tbl_dt_dosen')
-            ->where('nidn', $data['nidn'])
-            ->delete($data);
+        return $this->db->query('SELECT * FROM tbl_dt_dosen, tbl_dt_matkul WHERE tbl_dt_dosen.nidn = tbl_dt_matkul.nidn')->getResultArray();
     }
 }

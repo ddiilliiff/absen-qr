@@ -6,36 +6,15 @@ use CodeIgniter\Model;
 
 class JadwalModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'jadwals';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $DBGroup = 'default';
+    protected $table = 'tbl_dt_jadwal';
+    protected $primaryKey = 'id_jadwal';
+    protected $returnType = 'array';
+    protected $protectFields = true;
+    protected $allowedFields = ['id_jadwal', 'kode_mk', 'jam', 'ruangan', 'kelas'];
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    public function allData()
+    {
+        return $this->db->query('SELECT * FROM tbl_dt_jadwal, tbl_dt_matkul, tbl_dt_dosen WHERE tbl_dt_jadwal.kode_mk = tbl_dt_matkul.kode_mk AND tbl_dt_matkul.nidn = tbl_dt_dosen.nidn')->getResultArray();
+    }
 }

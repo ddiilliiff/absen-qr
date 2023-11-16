@@ -38,9 +38,9 @@ class Auth implements FilterInterface
                 }
                 break;
             case 2: // Dosen
-                if (strpos($route, 'dosen') === false) {
+                if (strpos($route, '') === false) {
                     // Jika pengguna dengan peran dosen mencoba mengakses rute yang tidak sesuai
-                    return redirect()->to('dosen');
+                    return redirect()->to('');
                 }
                 break;
             case 3: // Mahasiswa

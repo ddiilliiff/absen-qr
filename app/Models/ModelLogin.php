@@ -6,10 +6,18 @@ use CodeIgniter\Model;
 
 class ModelLogin extends Model
 {
-    public function CekUser($email, $password)
+    protected $DBGroup          = 'default';
+    protected $table            = 'tabel_user';
+    protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
+    protected $returnType       = 'array';
+    protected $protectFields    = true;
+    protected $allowedFields    = ['id', 'username', 'password', 'role'];
+
+    public function CekUser($username, $password)
     {
-        return $this->db->table('tbl_user')
-            ->where('email', $email)
+        return $this->db->table('tabel_user')
+            ->where('username', $username)
             ->where('password', $password)
             ->get()->getRowArray();
     }

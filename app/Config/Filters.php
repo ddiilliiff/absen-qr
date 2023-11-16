@@ -58,6 +58,10 @@ class Filters extends BaseConfig
                     'Login', 'Login/*',
                     'Admin', 'Admin/*',
                     'DataDosen', 'DataDosen/*',
+                    'Mahasiswa', 'Mahasiswa/*',
+                    'Matkul', 'Matkul/*',
+                    'QrCode', 'QrCode/*',
+                    'Jadwal', 'Jadwal/*',
                 ]
             ],
         ],

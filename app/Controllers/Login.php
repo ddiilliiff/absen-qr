@@ -2,61 +2,60 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\ModelLogin;
 
 class Login extends BaseController
 {
-
     public function __construct()
     {
-        $this->ModelLogin = new ModelLogin();
+        $this->user = new ModelLogin();
     }
 
     public function index()
     {
-        //session();
+        // session();
         $data = [
             'judul' => 'Login',
-            'validation' =>  \Config\Services::validation(),
+            'validation' => \Config\Services::validation(),
         ];
+
         return view('auth/v_login', $data);
     }
 
     public function CekLogin()
     {
-        if ($this->validate([
-            'email' => [
-                'label' => 'E-Mail',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Belum Diisi !',
+        $post = $this->request->getPost();
+        $user = $this->user->where('username', $post['username'])->first();
+        // dd($user, $post);
+        if ($user) {
+            if ($post['username'] == $user['username']) {
+                if (password_verify($post['password'], $user['password'])) {
+                    $role = $user['role'];
+                    // dd($role);
+                    session()->set('role', $role);
+                    switch ($role) {
+                        case 1:
+                            // dd($role);
 
-                ]
-            ],
-            'password' => [
-                'label' => 'Password',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Belum Diisi !',
-                ]
-            ]
-        ])) {
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-            $CekLogin = $this->ModelLogin->CekUser($email, $password);
+                            return redirect()->to('Admin');
+                            break;
+                        case 2:
+                            // dd($role);
 
-            if ($CekLogin) {
-                session()->set('nama_user', $CekLogin['nama_user']);
-                session()->set('level', $CekLogin['level']);
-                return redirect()->to(base_url('Admin'));
+                            return redirect()->to('');
+                            break;
+                        case 3:
+                            // dd($role);
+
+                            return redirect()->to('Mahasiswa');
+                            break;
+                    }
+                } else {
+                    return redirect()->back()->with('error', 'Password salah!');
+                }
             } else {
-                session()->setFlashdata('gagal', 'Email Atau Password Salah !!!');
-                return redirect()->to(base_url('Login'));
+                return redirect()->back()->with('error', 'Email salah!');
             }
-        } else {
-            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
-            return redirect()->to(base_url('Login'))->withInput('validation', \Config\Services::validation());
         }
     }
 
@@ -65,6 +64,7 @@ class Login extends BaseController
         session()->remove('nama_user');
         session()->remove('level');
         session()->setFlashdata('pesan', 'Anda Berhasil Logout !!!');
+
         return redirect()->to(base_url('Login'));
     }
 }
