@@ -28,6 +28,7 @@ class Admin extends BaseController
     // Dashboard
     public function index()
     {
+<<<<<<< HEAD
         $data = [
             'judul' => 'Dashboard',
             'page' => 'admin/v_dashboard',
@@ -299,5 +300,8 @@ class Admin extends BaseController
         // dd($data);
 
         return view('v_template', $data);
+=======
+        return view('admin/index');
+>>>>>>> d574cc7f321b30c4df1db573341ac2a0b381dfd4
     }
 }
