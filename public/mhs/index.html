@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/output.css">
+    <script src="https://kit.fontawesome.com/227a57dfb0.js" crossorigin="anonymous"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+
+    
+    
+
+    <div class="flex justify-center items-center">
+        <div class="flex-row justify-center items-center">
+            <div id="my-qr-reader" class="mt-5"></div>
+            <a href="" id="url" class="">absen</a>
+            <a id="your-qr-result"></a>
+        </div>
+        
+    </div>
+    
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script>
+        function domReady(fn){
+            if(document.readyState === "complete" || document.readyState === "interactive" ){
+                setTimeout(fn,1);
+            }else{
+                document.addEventListener("DOMContentLoaded", fn);
+            }
+        }   
+
+        domReady(function(){
+            var url = document.getElementById('url');
+            var myqr = document.getElementById('your-qr-result');
+            var lastResult,countResults = 0;
+
+            // if found u qr code
+            function onScanSuccess(decodeText,decodeResult){
+                if(decodeText !== lastResult){
+                    ++countResults;
+                    lastResult = decodeText;
+
+                    url.setAttribute('href', decodeText);
+
+                    myqr.innerHTML = `hasil scan : ${countResults} : ${decodeText}`
+
+                }
+            }
+
+            var htmlscanner = new Html5QrcodeScanner(
+                "my-qr-reader", {fps:10,qrbox:250})
+
+            htmlscanner.render(onScanSuccess)
+        })
+    </script>
+    
+    
+
+    <!-- <div class="flex w-screen h-20 justify-center items-center bottom-6 fixed">
+        <div class="flex justify-between items-center px-16 w-[90vw] h-full bg-yellow-400 rounded-full">
+            <div class="text-2xl"><i class="fa-solid fa-house"></i></div>
+            <div class="text-4xl mb-20 bg-yellow-500 px-6 py-5 rounded-full shadow-xl shadow-yellow-600">
+                <a href="#">
+                    <i class="fa-solid fa-qrcode"></i>
+                </a>
+            </div>
+            <div class="text-2xl"><i class="fa-solid fa-user"></i></div>
+        </div>
+    </div> -->
+
+
+    <!-- <script>
+        function startScan() {
+        // Mengakses elemen video
+        var video = document.getElementById('preview');
+
+        // Memeriksa apakah perangkat memiliki dukungan getUserMedia
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Mengakses kamera
+            navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'} })
+            .then(function (stream) {
+                // Menetapkan aliran video ke elemen video
+                video.srcObject = stream;
+
+                // Membuat instance Instascan
+                var scanner = new Instascan.Scanner({ video: video });
+
+                // Menambahkan handler ketika QR code terdeteksi
+                scanner.addListener('scan', function (content) {
+                alert('QR Code terdeteksi! Isi: ' + content);
+                });
+
+                // Memulai pemindaian
+                Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    alert('Tidak ada kamera yang ditemukan!');
+                }
+                });
+            })
+            .catch(function (error) {
+                console.error('Error accessing camera:', error);
+            });
+        } else {
+            alert('Browser tidak mendukung getUserMedia!');
+        }
+        }
+    </script> -->
+
+
+</body>
+</html>

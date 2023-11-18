@@ -22,7 +22,7 @@ class Login extends BaseController
         return view('auth/v_login', $data);
     }
 
-    public function CekLogin()
+    public function auth()
     {
         $post = $this->request->getPost();
         $user = $this->user->where('username', $post['username'])->first();
@@ -37,17 +37,17 @@ class Login extends BaseController
                         case 1:
                             // dd($role);
 
-                            return redirect()->to('Admin');
+                            return redirect()->to('Admin/index');
                             break;
                         case 2:
                             // dd($role);
 
-                            return redirect()->to('');
+                            return redirect()->to('Dosen/index');
                             break;
                         case 3:
                             // dd($role);
 
-                            return redirect()->to('Mahasiswa');
+                            return redirect()->to('Mahasiswa/index');
                             break;
                     }
                 } else {
