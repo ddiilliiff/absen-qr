@@ -7,7 +7,7 @@
    <link rel="stylesheet" href="<?php echo base_url(); ?>mhs/dist/output.css">
    <script src="https://kit.fontawesome.com/227a57dfb0.js" crossorigin="anonymous"></script>
 
-   <title>Document</title>
+   <title>Absen</title>
 </head>
 
 <body>
