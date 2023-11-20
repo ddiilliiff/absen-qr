@@ -141,15 +141,15 @@ class Admin extends BaseController
 
     public function updateMahasiswa()
     {
-        $nidn = $this->request->getPost('nidn');
+        $npm = $this->request->getPost('npm');
         $data = [
-            'nama_dosen' => $this->request->getPost('nama_dosen'),
+            'nama_mhs' => $this->request->getPost('nama_mhs'),
             'tempat_lahir' => $this->request->getPost('tempat_lahir'),
             'tgl_lahir' => $this->request->getPost('tgl_lahir'),
             'jk' => $this->request->getPost('jk'),
             'email' => $this->request->getPost('email'),
         ];
-        $this->mahasiswa->update($nidn, $data);
+        $this->mahasiswa->update($npm, $data);
 
         session()->setFlashdata('pesan', 'Data Berhasil Diupdate !!');
 
