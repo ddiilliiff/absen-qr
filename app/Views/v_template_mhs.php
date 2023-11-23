@@ -15,7 +15,7 @@
    <form action="<?php echo base_url(); ?>Mahasiswa/absen" method="post">
       <div class="flex justify-center items-center">
          <input type="hidden" name="id_jadwal" value="1" id="jadwal">
-         <input type="hidden" name="npm" value="1">
+         <input type="hidden" name="npm" value="<?php echo session('username'); ?>">
          <div class="flex-row justify-center items-center">
             <div id="my-qr-reader" class="mt-5"></div>
             <button type="submit">Absen</button>

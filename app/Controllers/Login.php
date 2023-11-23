@@ -31,8 +31,10 @@ class Login extends BaseController
             if ($post['username'] == $user['username']) {
                 if (password_verify($post['password'], $user['password'])) {
                     $role = $user['role'];
+                    $username = $user['username'];
                     // dd($role);
                     session()->set('role', $role);
+                    session()->set('username', $username);
                     switch ($role) {
                         case 1:
                             // dd($role);
@@ -45,7 +47,7 @@ class Login extends BaseController
                             return redirect()->to('Dosen/index');
                             break;
                         case 3:
-                            // dd($role);
+                            // dd($role, $username);
 
                             return redirect()->to('Mahasiswa/index');
                             break;
@@ -56,13 +58,15 @@ class Login extends BaseController
             } else {
                 return redirect()->back()->with('error', 'Email salah!');
             }
+        } else {
+            return redirect()->back()->with('error', 'Pengguna tidak ditemukan');
         }
     }
 
-    public function LogOut()
+    public function logout()
     {
-        session()->remove('nama_user');
-        session()->remove('level');
+        session()->remove('username');
+        session()->remove('role');
         session()->setFlashdata('pesan', 'Anda Berhasil Logout !!!');
 
         return redirect()->to(base_url('Login'));
