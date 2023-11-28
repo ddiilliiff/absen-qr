@@ -38,4 +38,16 @@ class MatkulModel extends Model
             ->where('kode_mk', $data['kode_mk'])
             ->delete($data);
     }
+
+    public function getMatkulByDosen($nidn)
+    {
+        // Sesuaikan nama kolom dan tabel sesuai dengan struktur Anda
+        $result = $this->db->table('tbl_dt_matkul')
+                          ->join('tbl_dt_jadwal', 'tbl_dt_matkul.kode_mk = tbl_dt_jadwal.kode_mk')
+                          ->where('tbl_dt_matkul.nidn', $nidn)
+                          ->get()
+                          ->getResultArray();
+
+        return $result;
+    }
 }

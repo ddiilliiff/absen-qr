@@ -24,4 +24,9 @@ class DosenModel extends Model
     {
         return $this->db->query('SELECT * FROM tbl_dt_dosen, tbl_dt_matkul WHERE tbl_dt_dosen.nidn = tbl_dt_matkul.nidn')->getResultArray();
     }
+
+    public function getDataByNIDN($nidn)
+    {
+        return $this->where('nidn', $nidn)->first();
+    }
 }

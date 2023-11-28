@@ -24,14 +24,14 @@
 //     $routes->get('', 'Mahasiswa::index');
 // });
 
-
 // Damar
+
 namespace Config;
 
 $routes = Services::routes();
 
-if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
-    require SYSTEMPATH . 'Config/Routes.php';
+if (is_file(SYSTEMPATH.'Config/Routes.php')) {
+    require SYSTEMPATH.'Config/Routes.php';
 }
 
 $routes->setDefaultNamespace('App\Controllers');
@@ -42,8 +42,16 @@ $routes->set404Override();
 
 $routes->setAutoRoute(true);
 
-$routes->get('/', 'Login::index');
+$routes->get('/', 'Auth::index');
 
-if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+// $routes->group('Auth', ['filter' => 'auth'], function ($routes) {
+//     $routes->post('/auth', 'Auth::auth');
+// });
+
+// $routes->group('admin', ['filter' => 'auth'], function ($routes) {
+//     $routes->get('/', '');
+// });
+
+if (is_file(APPPATH.'Config/'.ENVIRONMENT.'/Routes.php')) {
+    require APPPATH.'Config/'.ENVIRONMENT.'/Routes.php';
 }

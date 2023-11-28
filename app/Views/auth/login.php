@@ -23,7 +23,7 @@
 
    <!-- wrapper -->
    <div class="wrapper">
-      <form action="<?php echo base_url(); ?>login/auth" method="post">
+      <form action="<?php echo base_url(); ?>Auth/auth" method="post">
          <h1>Login</h1>
          <div class="input-box">
             <input type="text" placeholder="Username" required name="username">

@@ -23,7 +23,7 @@ class FilterAdmin implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if (session()->get('role') == '') {
-            return redirect()->to(base_url('Login'));
+            return redirect()->to(base_url());
         }
     }
 
@@ -37,8 +37,14 @@ class FilterAdmin implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // if (session()->get('role') == '1') {
-        //     return redirect()->to('Admin');
-        // }
+        if (session()->get('role') == '1') {
+            return redirect()->to('Admin');
+        } else {
+            if (session()->get('role') == '2') {
+                return redirect()->to('Dosen');
+            } else {
+                return redirect()->to('Mahasiswa');
+            }
+        }
     }
 }

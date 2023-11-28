@@ -22,38 +22,39 @@ class Auth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
+        return $request;
         //
-        // Ambil rute yang sedang diakses
-        $route = $request->uri->getPath();
+        // // Ambil rute yang sedang diakses
+        // $route = $request->uri->getPath();
 
-        // Ambil peran pengguna dari sesi
-        $role = session('role');
+        // // Ambil peran pengguna dari sesi
+        // $role = session('role');
 
         // Cek akses pengguna berdasarkan peran dan rute yang diakses
-        switch ($role) {
-            case 1: // Admin
-                if (strpos($route, 'admin') === false) {
-                    // Jika pengguna dengan peran admin mencoba mengakses rute yang tidak sesuai
-                    return redirect()->to('admin');
-                }
-                break;
-            case 2: // Dosen
-                if (strpos($route, '') === false) {
-                    // Jika pengguna dengan peran dosen mencoba mengakses rute yang tidak sesuai
-                    return redirect()->to('');
-                }
-                break;
-            case 3: // Mahasiswa
-                if (strpos($route, 'mahasiswa') === false) {
-                    // Jika pengguna dengan peran mahasiswa mencoba mengakses rute yang tidak sesuai
-                    return redirect()->to('mahasiswa');
-                }
-                break;
-            default:
-                // Jika peran tidak ditemukan, arahkan ke halaman login atau tampilkan pesan akses ditolak
-                return redirect()->to('/');
-                break;
-        }
+        // switch ($role) {
+        //     case 1: // Admin
+        //         if (strpos($route, '1') === false) {
+        //             // Jika pengguna dengan peran admin mencoba mengakses rute yang tidak sesuai
+        //             return redirect()->to(base_url('Admin'));
+        //         }
+        //         break;
+        //     case 2: // Dosen
+        //         if (strpos($route, '2') === false) {
+        //             // Jika pengguna dengan peran dosen mencoba mengakses rute yang tidak sesuai
+        //             return redirect()->to(base_url('Dosen'));
+        //         }
+        //         break;
+        //     case 3: // Mahasiswa
+        //         if (strpos($route, '3') === false) {
+        //             // Jika pengguna dengan peran mahasiswa mencoba mengakses rute yang tidak sesuai
+        //             return redirect()->to(base_url('Mahasiswa'));
+        //         }
+        //         break;
+        //     default:
+        //         // Jika peran tidak ditemukan, arahkan ke halaman login atau tampilkan pesan akses ditolak
+        //         return redirect()->to('/');
+        //         break;
+        // }
     }
 
     /**
@@ -66,5 +67,6 @@ class Auth implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
+        return $response;
     }
 }

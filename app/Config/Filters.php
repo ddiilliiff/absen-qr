@@ -25,9 +25,8 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        // 'auth' => \App\Filters\Auth::class,
-        'filteradmin' => \App\Filters\FilterAdmin::class,
-
+        'auth' => \App\Filters\Auth::class,
+        // 'filteradmin' => \App\Filters\FilterAdmin::class,
     ];
 
     /**
@@ -40,29 +39,25 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            'filteradmin' => [
+            'auth' => [
                 'except' => [
                     '/',
                     // 'Home', 'Home/*',
-                    'Login', 'Login/*',
-                ]
+                    'Auth', 'Auth/*',
+                ],
             ],
-
         ],
         'after' => [
             'toolbar',
-            'filteradmin' => [
+            'auth' => [
                 'except' => [
                     '/',
                     // 'Home', 'Home/*',
-                    'Login', 'Login/*',
+                    'Auth', 'Auth/*',
                     'Admin', 'Admin/*',
-                    'DataDosen', 'DataDosen/*',
+                    'Dosen', 'Dosen/*',
                     'Mahasiswa', 'Mahasiswa/*',
-                    'Matkul', 'Matkul/*',
-                    'QrCode', 'QrCode/*',
-                    'Jadwal', 'Jadwal/*',
-                ]
+                ],
             ],
         ],
     ];

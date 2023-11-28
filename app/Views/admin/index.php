@@ -122,19 +122,20 @@
                      </div>
                      <div class="flex-grow">
                         <h1 class="font-bold text-lg mb-2 text-gray-700 ">Logout</h1>
-                        <p class="text-gray-700">are you sure you want to logout ?</p>
+                        <p class="text-gray-700">are you sure you want to logout?</p>
                      </div>
                   </div>
                   <div class="bg-gray-100 py-3 px-6 flex justify-end gap-4">
                      <button onclick="hideDialog()"
                         class="bg-white px-2 py-1 border rounded text-black cursor-pointer hover:bg-gray-100">Cancel</button>
-                     <button
-                        class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">Logout</button>
+                     <a href="<?php echo base_url('Auth/logout'); ?>"
+                        class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">Logout</a>
                   </div>
                </div>
             </div>
             <!-- end modals logout -->
             <!-- end nav -->
+            
 
             <!-- start main -->
             <div class="w-full mt-6">

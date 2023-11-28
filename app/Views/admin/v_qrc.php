@@ -29,9 +29,10 @@
                class="bg-white px-2 py-1 border rounded text-black cursor-pointer hover:bg-gray-100">
                Cancel
             </button>
-            <button class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">
+            <a href="<?php echo base_url('Auth/logout'); ?>"
+               class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">
                Logout
-            </button>
+            </a>
          </div>
       </div>
    </div>
@@ -62,7 +63,7 @@
                   <td><?php echo $no++; ?></td>
                   <td>
                      <img
-                        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo $value['id_jadwal']; ?>"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=<?php echo $value['id_jadwal']; ?>"
                         alt="" srcset="">
                   </td>
                   <td>
@@ -73,7 +74,8 @@
                         <li>Dosen Pengampuh : <?php echo $value['nama_dosen']; ?></li>
                         <li>SKS : <?php echo $value['sks']; ?></li>
                         <li>Ruangan : <?php echo $value['ruangan']; ?></li>
-                        <li>Hari, Waktu : Hari, <?php echo $value['jam']; ?></li>
+                        <li>Hari, Waktu : <?php echo $value['hari']; ?>, <?php echo $value['jam_mulai']; ?> -
+                           <?php echo $value['jam_selesai']; ?></li>
                      </ul>
                   </td>
                   <td>

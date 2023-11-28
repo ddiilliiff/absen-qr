@@ -15,7 +15,7 @@ class Mahasiswa extends BaseController
 
     public function index()
     {
-        return view('v_template_mhs');
+        return view('mahasiswa/index');
     }
 
     public function absen()
@@ -24,19 +24,24 @@ class Mahasiswa extends BaseController
         $npm = $this->request->getPost('npm');
 
         if ($id_jadwal == '' && $npm == '') {
-            echo 'Belum melakukan scan';
+            return redirect()->to('Mahasiswa/error');
             exit;
         }
         $this->request->getPost();
 
         $data = [
-            'npm' => $this->request->getPost('npm'),
-            'id_jadwal' => $this->request->getPost('id_jadwal'),
-            'status' => 1,
+        'npm' => $this->request->getPost('npm'),
+        'id_jadwal' => $this->request->getPost('id_jadwal'),
+        'status' => 1,
         ];
 
         $this->absen->insert($data);
 
         echo 'Berhasil disimpan';
+    }
+
+    public function error()
+    {
+        echo 'Ini halaman error';
     }
 }

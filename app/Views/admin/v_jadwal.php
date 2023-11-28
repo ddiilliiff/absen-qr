@@ -29,9 +29,10 @@
                class="bg-white px-2 py-1 border rounded text-black cursor-pointer hover:bg-gray-100">
                Cancel
             </button>
-            <button class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">
+            <a href="<?php echo base_url('Auth/logout'); ?>"
+               class="bg-red-700 px-2 py-1 rounded text-white cursor-pointer hover:bg-red-600">
                Logout
-            </button>
+            </a>
          </div>
       </div>
    </div>
@@ -67,9 +68,17 @@
                            <?php }?>
                         </select>
                      </div>
-                     <div class="grid grid-rows-2 items-center pb-2  w-full">
-                        <label for="jam">Jam</label>
-                        <input type="text" name="jam" id="jam" class="border rounded-lg px-2 py-1" required />
+                  </div>
+                  <div class="flex gap-2">
+                     <div class="grid grid-rows-2 items-center pb-2">
+                        <label for="jam">Jam Mulai</label>
+                        <input type="time" name="jam_mulai" id="jam_mulai" class="border rounded-lg px-2 py-1"
+                           required />
+                     </div>
+                     <div class="grid grid-rows-2 items-center pb-2">
+                        <label for="jam">Jam Selesai</label>
+                        <input type="time" name="jam_selesai" id="jam_selesai" class="border rounded-lg px-2 py-1"
+                           required />
                      </div>
                   </div>
                   <div class="flex gap-2">
@@ -84,7 +93,7 @@
                   </div>
 
                   <div class="flex justify-end items-center w-100 p-3">
-                     <button class="bg-red-500 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
+                     <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">
                         Cancel
                      </button>
                      <button type="submit" class="bg-sky-500 hover:bg-sky-700 px-3 py-1 rounded text-white">
@@ -118,7 +127,7 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $value['mata_kuliah']; ?></td>
                   <td><?php echo $value['nama_dosen']; ?></td>
-                  <td><?php echo $value['jam']; ?></td>
+                  <td><?php echo $value['jam_mulai']; ?> - <?php echo $value['jam_selesai']; ?> WIT</td>
                   <td><?php echo $value['ruangan']; ?></td>
                   <td><?php echo $value['kelas']; ?></td>
                   <td>
@@ -170,8 +179,13 @@
             <div class="flex gap-2">
                <div class="grid grid-rows-2 items-center pb-2">
                   <label for="jam">Jam</label>
-                  <input type="text" name="jam" id="jam" class="border rounded-lg px-2 py-1" required
-                     value="<?php echo $value['jam']; ?>" />
+                  <input type="text" name="jam_mulai" id="jam_mulai" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['jam_mulai']; ?>" />
+               </div>
+               <div class="grid grid-rows-2 items-center pb-2">
+                  <label for="jam">Jam</label>
+                  <input type="text" name="jam_selesai" id="jam_selesai" class="border rounded-lg px-2 py-1" required
+                     value="<?php echo $value['jam_selesai']; ?>" />
                </div>
                <div class="grid grid-rows-2 items-center pb-2">
                   <label for="ruangan">Ruangan</label>

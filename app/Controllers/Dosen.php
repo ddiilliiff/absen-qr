@@ -21,9 +21,15 @@ class Dosen extends BaseController
 
     public function index()
     {
-        $dosenModel = new DosenModel();
-        $dosen = $dosenModel->dosen();
+        $data['data'] = $this->dosen->getDataByNIDN(session()->get('username'));
+        $data['matkul'] = $this->matkul->getMatkulByDosen(session()->get('username'));
+        // dd($data);
 
-        return view('dosen.index', compact('dosen'));
+        return view('dosen/index', $data);
+    }
+
+    public function absen()
+    {
+        return view('dosen/absen');
     }
 }

@@ -36,7 +36,7 @@
             echo '</div>';
         }
    ?>
-      <?php echo form_open('Login/auth'); ?>
+      <?php echo form_open('Auth/auth'); ?>
       <p class="text-danger"><?php echo ($validation->hasError('username')) ? $validation->getError('username') : ''; ?>
       </p>
       <div class="input-box">
