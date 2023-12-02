@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      *    http://example.com/
      */
-    public string $baseURL = 'https://absen-qr-18411057.online/public/';
+    public string $baseURL = 'https://test.absen-qr-18411057.online/public/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
