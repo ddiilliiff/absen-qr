@@ -23,8 +23,8 @@
          </div>
          <div class="flex gap-4">
             <div class="text-slate-700 flex-col">
-               <h1 class="font-bold text-2xl underline">Mursid, MT</h1>
-               <h1 class="text-sm">17-411-091</h1>
+               <h1 class="font-bold text-2xl underline"><?php echo $data['nama_dosen']; ?></h1>
+               <h1 class="text-sm"><?php echo $data['nidn']; ?></h1>
             </div>
             <div
                class="border-1 rounded-full bg-white w-14 h-14 overflow-hidden shadow-lg hover:mb-2 hover:h-16 hover:w-16 transition-all duration-200 ease-in-out">
@@ -61,10 +61,21 @@
       <!-- start main -->
       <div class="px-20 pt-36 mb-10 ">
          <div class="flex justify-between mb-5">
-            <h1 class="text-4xl font-bold underline">Daftar Absensi</h1>
+            <h1 class="text-4xl font-bold underline">Daftar Absensi <?php echo $matkul[0]['mata_kuliah']; ?> Kelas
+               <?php echo $matkul[0]['kelas']; ?></h1>
             <a href="#"
                class="flex bg-sky-300 items-center justify-center px-4 py-2 rounded-lg hover:bg-sky-500 transition-all duration-100">
                <i class="fa-solid fa-download mr-2"></i> Cetak Laporan</a>
+         </div>
+         <div>
+            Mata kuliah : <?php echo $matkul[0]['mata_kuliah']; ?> <br>
+            Dosen : <?php echo $matkul[0]['nama_dosen']; ?> <br>
+            NIDN : <?php echo $matkul[0]['nidn']; ?> <br>
+            SKS : <?php echo $matkul[0]['sks']; ?> <br>
+            Ruangan : <?php echo $matkul[0]['ruangan']; ?> <br>
+            Hari : <?php echo $matkul[0]['hari']; ?> <br>
+            Jam : <?php echo $matkul[0]['jam_mulai']; ?> - <?php echo $matkul[0]['jam_selesai']; ?> WIT <br>
+            Kelas : <?php echo $matkul[0]['kelas']; ?> <br>
          </div>
          <table id="example" class="display ">
             <thead>
@@ -74,389 +85,30 @@
                   <th colspan="16" style="text-align: center;">Pertemuan</th>
                </tr>
                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                  <th>6</th>
-                  <th>7</th>
-                  <th>8</th>
-                  <th>9</th>
-                  <th>10</th>
-                  <th>11</th>
-                  <th>12</th>
-                  <th>13</th>
-                  <th>14</th>
-                  <th>15</th>
-                  <th>16</th>
+                  <?php for ($i = 1; $i <= 16; ++$i) { ?>
+                  <th><?php echo $i; ?></th>
+                  <?php } ?>
                </tr>
             </thead>
             <tbody>
+               <?php foreach ($absensi as $a) { ?>
                <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
+                  <td><?php echo $a['nama_mhs']; ?></td>
+                  <td><?php echo $a['npm']; ?></td>
+                  <?php $pertemuan = explode(',', $a['pertemuan']); ?>
+                  <?php $status = explode(',', $a['status']); ?>
+                  <?php for ($i = 1; $i <= 16; ++$i) {  ?>
                   <td>
+                     <?php if (isset($status[$i - 1]) && $status[$i - 1] == '1') { ?>
+                     <input type="checkbox" checked>
+                     <?php } else { ?>
                      <input type="checkbox">
+                     <?php } ?>
                   </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
+                  <?php } ?>
                </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
                </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-               </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-               </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-               </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-               </tr>
-               <tr>
-                  <td>17411091</td>
-                  <td>ziko tri atmadja salasa</td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-                  <td>
-                     <input type="checkbox">
-                  </td>
-               </tr>
+               <?php } ?>
             </tbody>
          </table>
       </div>

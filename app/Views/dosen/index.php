@@ -82,14 +82,14 @@
          <!-- start card -->
          <?php foreach ($matkul as $mk => $v) { ?>
          <div
-            class="border w-96 h-60 bg-white rounded-xl shadow-lg hover:w-[400px] hover:h-64 transition-all duration-200 ease-in-out">
+            class="border w-96 h-72 bg-white rounded-xl shadow-lg hover:w-[400px] hover:h-64 transition-all duration-200 ease-in-out">
             <div class="flex flex-col p-6 gap-1 justify-center items-center">
                <h1 class="text-2xl text-gray-600 font-bold underline"><?php echo $v['mata_kuliah']; ?></h1>
                <h2 class="pt-2">Hari : <?php echo $v['hari']; ?></h2>
                <h2>Jam : <?php echo $v['jam_mulai']; ?> - <?php echo $v['jam_selesai']; ?> WIT</h2>
                <h2>Semester : <?php echo $v['smt']; ?></h2>
                <h2 class="pb-2">Jumlah Mahasiswa : </h2>
-               <a href="<?php echo base_url('Dosen/absen'); ?>"
+               <a href="<?php echo base_url('Dosen/absensi/'); ?><?php echo $v['id_jadwal']; ?>"
                   class="flex bg-sky-400 w-32 h-8 rounded text-white justify-center items-center cursor-pointer">Lihat
                   Absen</a>
             </div>

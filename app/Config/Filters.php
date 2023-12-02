@@ -42,7 +42,6 @@ class Filters extends BaseConfig
             'auth' => [
                 'except' => [
                     '/',
-                    // 'Home', 'Home/*',
                     'Auth', 'Auth/*',
                 ],
             ],
@@ -52,7 +51,6 @@ class Filters extends BaseConfig
             'auth' => [
                 'except' => [
                     '/',
-                    // 'Home', 'Home/*',
                     'Auth', 'Auth/*',
                     'Admin', 'Admin/*',
                     'Dosen', 'Dosen/*',

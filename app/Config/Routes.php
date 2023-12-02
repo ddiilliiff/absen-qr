@@ -44,6 +44,12 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Auth::index');
 
+// app/Config/Routes.php
+
+$routes->group('api', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('get-mata-kuliah-info/(:segment)', 'Api::getMataKuliahInfo/$1');
+});
+
 // $routes->group('Auth', ['filter' => 'auth'], function ($routes) {
 //     $routes->post('/auth', 'Auth::auth');
 // });

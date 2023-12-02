@@ -15,37 +15,88 @@
 
 <body>
 
-   <div class="flex justify-center items-center mt-10">
-      <h1 class="font-semibold">SILAHKAN SCAN UNTUK ABSEN</h1>
+   <div id="menu" class="bg-slate-200 w-32 h-screen rounded-r-xl fixed top-0 bottom-0 left-0 z-50 transform ease-in-out duration-1000 transition-transform -translate-x-full">
+      <div class="mt-10 p-3">
+         <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+            <a href="krs.html">KRS</a>
+         </div>
+         <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+            <a href="index.html">Absen</a>
+         </div>
+         <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+            <a href="">keluar</a>
+         </div>
+      </div>
    </div>
+   <button id="burger" class="bg-white p-4 transform ease-in-out duration-1000 transition-transform"><i class="fa-solid fa-bars text-2xl self-end"></i></button>
 
-   <div class="flex justify-center items-center">
-      <div id="my-qr-reader" class="mt-5 w-1/2"></div>
-   </div>
-
-    <div id="detail" class="fixed bottom-0 left-0 right-0 h-96 rounded-t-2xl text-xl border border-t-2 transform ease-in-out duration-1000 transition-transform translate-y-full">
-      <div class="flex justify-center items-center w-full">
-         <form action="" method="post" class="mt-10">
-            <div class="flex mb-2">
-               <label>ID Jadwal <span class="mr-2">:</span> </label>
-               <input type="text" name="id_jadwal" value="" id="jadwal" disabled>
-            </div>
    
-            <div class="flex mb-8">
-               <label>NPM <span class="ml-12 mr-2">:</span> </label>
-               <input type="text" name="npm" value="17411091" disabled >
+      <div class="flex justify-center items-center pt-3">
+         <h1 class="font-semibold">SILAHKAN SCAN UNTUK ABSEN</h1>
+      </div>
+
+      <div class="flex justify-center items-center">
+         <div id="my-qr-reader" class="mt-5 w-1/2"></div>
+      </div>
+
+    <div id="detail" class="fixed bottom-0 left-0 right-0 h-96 bg-white rounded-t-2xl text-xl border border-t-2 transform ease-in-out duration-1000 transition-transform">
+         <form action="" method="post" class="mt-8">
+            
+            
+            <input type="hidden" name="id_jadwal" value="" id="jadwal" class="w-1/2 border rounded-full px-2" disabled>
+            
+   
+            <div class="flex justify-center items-center mb-4">
+               <label>NPM <span class="ml-14 mr-1">:</span> </label>
+               <input type="text" name="npm" value="" class="w-1/2 border rounded-full px-2" disabled >
+            </div>
+
+            <div class="flex items-center justify-center mb-4">
+               <label>Matakuliah <span class="mr-1">:</span> </label>
+               <input type="text" name="mk" value="" class="w-1/2 border rounded-full px-2" disabled >
+            </div>
+
+            <div class="flex items-start justify-center mb-4">
+               <label>Dosen <span class="ml-12 mr-1">:</span> </label>
+               <input type="text" name="dosen" value="" class="w-1/2 border rounded-full px-2" disabled >
+            </div>
+
+            <div class="flex items-center justify-center mb-4">
+               <label>Hari, jam <span class="ml-7 mr-1">:</span> </label>
+               <input type="text" name="hari_jam" value="" class="w-1/2 border rounded-full px-2" disabled >
+            </div>
+
+            <div class="flex items-center justify-center mb-4">
+               <label>Kelas <span class="ml-14 mr-1">:</span> </label>
+               <input type="text" name="kelas" value="" class="w-1/2 border rounded-full px-2" disabled >
+            </div>
+
+            <div class="flex items-center justify-center mb-4">
+               <label>Ruangan <span class="ml-7 mr-1">:</span> </label>
+               <input type="text" name="ruangan" value="" class="w-1/2 border rounded-full px-2" disabled >
             </div>
             
-            <div class="flex justify-center items-center">
-               <button type="submit" class="bg-blue-500 px-5 py-1 rounded-xl">Absen</button>
+            <div class="flex justify-center mb-2">
+               <button type="submit" class="bg-blue-500 text-white px-5 py-1 rounded-xl">Absen</button>
             </div>
          </form>
-      </div>
     </div>
-
    
 
    <script src="https://unpkg.com/html5-qrcode"></script>
+
+   <script>
+      var menu = document.getElementById('menu');
+      var burger = document.getElementById('burger');
+
+      burger.addEventListener('click', function (){
+         menu.classList.toggle('-translate-x-full');
+         burger.classList.toggle('translate-x-32');
+         // menu.classList.toggle('fixed');
+         // menu.classList.toggle('float-left');
+
+      });
+   </script>
    
    <script>
    function domReady(fn) {
@@ -69,8 +120,7 @@
 
             jadwal.setAttribute('value', decodeText);
 
-            detail.classList.remove('translate-y-full');
-            detail.classList.add('translate-y-0');
+            detail.classList.toggle('translate-y-full');
 
             // myqr.innerHTML = `hasil scan : ${countResults} : ${decodeText}`
 

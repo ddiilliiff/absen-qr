@@ -50,4 +50,29 @@ class MatkulModel extends Model
 
         return $result;
     }
+
+    public function getMatkulByJadwal($id_jadwal)
+    {
+        $query = 'SELECT * FROM tbl_dt_matkul
+                  JOIN tbl_dt_jadwal ON tbl_dt_matkul.kode_mk = tbl_dt_jadwal.kode_mk
+                  JOIN tbl_dt_dosen ON tbl_dt_dosen.nidn = tbl_dt_matkul.nidn
+                  WHERE tbl_dt_jadwal.id_jadwal = ?';
+
+        $result = $this->db->query($query, [$id_jadwal])->getResultArray();
+
+        return $result;
+    }
+
+    public function getMataKuliahBySemester($smt)
+    {
+        try {
+            // Sesuaikan query berdasarkan struktur tabel dan relasi Anda
+            return $this->where('smt', $smt)->findAll();
+        } catch (\Exception $e) {
+            // Tangani kesalahan, misalnya catat pesan kesalahan
+            log_message('error', 'Error in getMataKuliahBySemester: '.$e->getMessage());
+
+            return [];
+        }
+    }
 }

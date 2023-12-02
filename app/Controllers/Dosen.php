@@ -28,8 +28,15 @@ class Dosen extends BaseController
         return view('dosen/index', $data);
     }
 
-    public function absen()
+    public function absensi($id_jadwal)
     {
-        return view('dosen/absen');
+        $data = [
+            'data' => $this->dosen->getDataByNIDN(session()->get('username')),
+            'matkul' => $this->matkul->getMatkulByJadwal($id_jadwal),
+            'absensi' => $this->absen->getAbsensiMahasiswa($id_jadwal),
+        ];
+        // dd($data);
+
+        return view('dosen/absen', $data);
     }
 }

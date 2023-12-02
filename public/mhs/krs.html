@@ -9,6 +9,21 @@
 </head>
 <body>
 
+    <div id="menu" class="bg-slate-200 w-32 h-screen rounded-r-xl fixed top-0 bottom-0 left-0 z-50 transform ease-in-out duration-1000 transition-transform -translate-x-full">
+        <div class="mt-10 p-3">
+           <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+              <a href="krs.html">KRS</a>
+           </div>
+           <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+              <a href="index.html">Absen</a>
+           </div>
+           <div class="flex justify-center items-center p-2 rounded-2xl shadow-lg bg-white mb-3">
+              <a href="">keluar</a>
+           </div>
+        </div>
+     </div>
+     <button id="burger" class="bg-white p-4 transform ease-in-out duration-1000 transition-transform"><i class="fa-solid fa-bars text-2xl self-end"></i></button>
+
     <!-- navbar -->
     <div class="flex justify-center items-center">
         <div class="flex h-20 w-screen  items-center border-b-2 bg-slate-200 shadow-lg rounded-b-2xl">
@@ -23,7 +38,9 @@
             <div class="flex gap-2 p-4 w-[90%] justify-center items-center border border-slate-200 rounded-xl shadow-xl text-xl font-light">
                 <h1>Nama Matakuliah</h1>
                 <p>|</p>
-                <h1>semester</h1>
+                <h1>Hadir</h1>
+                <p>|</p>
+                <h1>Tidak Hadir</h1>
                 <span></span>
             </div>
         </div>
@@ -32,7 +49,9 @@
             <div class="flex gap-2 p-4 w-[90%] justify-center items-center border border-slate-200 rounded-xl shadow-xl text-xl font-light">
                 <h1>Nama Matakuliah</h1>
                 <p>|</p>
-                <h1>semester</h1>
+                <h1>Hadir</h1>
+                <p>|</p>
+                <h1>Tidak Hadir</h1>
                 <span></span>
             </div>
         </div>
@@ -46,7 +65,18 @@
     </div>
     
 
-    
+    <script>
+        var menu = document.getElementById('menu');
+        var burger = document.getElementById('burger');
+  
+        burger.addEventListener('click', function (){
+           menu.classList.toggle('-translate-x-full');
+           burger.classList.toggle('translate-x-32');
+           // menu.classList.toggle('fixed');
+           // menu.classList.toggle('float-left');
+  
+        });
+     </script>
 
 </body>
 </html>
